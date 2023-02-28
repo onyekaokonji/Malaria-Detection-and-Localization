@@ -1,10 +1,9 @@
-# %% [code]
 import numpy as np # linear algebra
 import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
 import os
 import cv2
 
-def load_and_preprocess_images(base_path):
+def load_and_preprocess_images(base_path:str):
     Image_files = []
     Labels = []
     Dataset = []
@@ -37,7 +36,7 @@ def load_and_preprocess_images(base_path):
                 img_copy = cv2.cvtColor(img_copy, cv2.COLOR_RGB2GRAY)
 
         # preprocessing using canny edge detector to make image edges sharper and image smoother
-                img_copy = cv2.GaussianBlur(img, (7,7), 0) 
+                img_copy = cv2.GaussianBlur(img_copy, (7,7), 0) 
                 edges = cv2.Canny(img_copy, threshold1 = 80, threshold2 = 160)
                 edges = cv2.cvtColor(edges, cv2.COLOR_GRAY2RGB)
         
@@ -49,3 +48,6 @@ def load_and_preprocess_images(base_path):
                 continue
 
     return Dataset
+
+if __name__ == '__main__':
+        load_and_preprocess_images()
